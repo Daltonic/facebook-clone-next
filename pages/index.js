@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Facebook Clone</title>
+        <title>Facebook Clone - Wall</title>
       </Head>
 
       <main>
