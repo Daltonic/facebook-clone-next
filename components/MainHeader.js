@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import Image from 'next/image'
 import HeaderIcon from './HeaderIcon'
 import {
   BellIcon,
@@ -15,27 +14,22 @@ import {
   SearchIcon,
   ShoppingCartIcon,
 } from '@heroicons/react/outline'
-import { useState, useEffect } from 'react'
+import { useUser } from '@auth0/nextjs-auth0'
 
 function MainHeader() {
-  const [user, setUser] = useState()
-
-  useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem('user')))
-  }, [])
-
+  const { user, error, isLoading } = useUser()
   return (
     <header className="sticky top-0 z-50 bg-white flex items-center p-2 lg:px-5 shadow-md">
       {/* Left */}
       <div className="flex items-center">
         <img
-          src="../assets/logo.png"
+          src="/logo.png"
           alt="Facebook Logo"
           width="40"
           height="40"
           loading="lazy"
           className="cursor-pointer"
-          onClick={() => moveTo('/')}
+          // onClick={() => moveTo('/')}
         />
         <div className="hidden md:inline-flex ml-2 items-center rounded-full bg-gray-100 p-2">
           <SearchIcon className="h-6 text-gray-600" />
@@ -60,7 +54,7 @@ function MainHeader() {
       {/* Right */}
       <div className="flex items-center sm:space-x-2 justify-end">
         <img
-          src={user?.photoURL}
+          src={user?.picture}
           alt="avatar"
           width="30"
           height="30"
@@ -69,7 +63,7 @@ function MainHeader() {
           className="icon"
         />
         <p className="hidden lg:inline-flex text-sm whitespace-nowrap font-semibold pr-3">
-          {user?.displayName}
+          {user?.name}
         </p>
         <ViewGridIcon className="icon" />
         <ChatIcon className="icon" />
