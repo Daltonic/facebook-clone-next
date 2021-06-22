@@ -2,14 +2,10 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { auth, provider } from '../firebase'
 import { cometChat } from '../app.config'
-import { useEffect } from 'react'
+import { CometChat } from '@cometchat-pro/chat'
 
 function Login() {
   const [loading, setLoading] = useState(false)
-
-  useEffect(() => {
-    window.CometChat = require('@cometchat-pro/chat').CometChat
-  }, [])
 
   const signIn = () => {
     setLoading(true)
@@ -26,7 +22,7 @@ function Login() {
   const loginCometChat = (data) => {
     const authKey = cometChat.AUTH_KEY
 
-    window.CometChat.login(data.uid, authKey)
+    CometChat.login(data.uid, authKey)
       .then((u) => {
         console.log(u)
         setLoading(false)
@@ -44,12 +40,12 @@ function Login() {
 
   const signUpWithCometChat = (data) => {
     const authKey = cometChat.AUTH_KEY
-    const user = new window.CometChat.User(data.uid)
+    const user = new CometChat.User(data.uid)
 
     user.setName(data.displayName)
     user.setAvatar(data.photoURL)
 
-    window.CometChat.createUser(user, authKey)
+    CometChat.createUser(user, authKey)
       .then(() => {
         setLoading(false)
         alert('You are now signed up, click the button again to login')

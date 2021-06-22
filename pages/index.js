@@ -1,11 +1,14 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
-// import { withPageAuthRequired } from '@auth0/nextjs-auth0';
+import dynamic from 'next/dynamic'
 import Head from 'next/head'
 // import Feed from '../components/Feed'
 // import MainHeader from '../components/MainHeader'
 // import Sidebar from '../components/Sidebar'
 // import Widget from '../components/Widget'
-import Login from '../components/Login'
+const Login = dynamic(
+  () => import('../components/Login'),
+  { ssr: false }
+)
 // import {db} from '../firebase'
 import { auth } from '../firebase'
 
