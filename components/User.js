@@ -1,14 +1,11 @@
 import { CometChat } from '@cometchat-pro/chat'
 import Message from './Message'
 import { useState, useEffect } from 'react'
-import { useSession } from 'next-auth/client'
 
 function User({ uid }) {
   const [user, setUser] = useState(null)
   const [messages, setMessages] = useState([])
   const [message, setMessage] = useState('')
-
-  const [session] = useSession()
 
   const listenForMessage = (listenerID) => {
     CometChat.addMessageListener(

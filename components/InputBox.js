@@ -1,15 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
 import { EmojiHappyIcon } from '@heroicons/react/outline'
 import { CameraIcon, VideoCameraIcon } from '@heroicons/react/solid'
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { db, storage, timestamp } from '../firebase'
-import { useUser } from '@auth0/nextjs-auth0'
 
 function InputBox() {
   const inputRef = useRef(null)
   const [imageToPost, setImageToPost] = useState(null)
   const filepickerRef = useRef(null)
-  const { user } = useUser()
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem('user')))
+  }, [])
   
 
   const sendPost = (e) => {
@@ -20,9 +23,9 @@ function InputBox() {
     db.collection('posts')
       .add({
         message: inputRef.current.value,
-        name: user.name,
-        email: user.email,
-        image: user.image,
+        name: user?.displayName,
+        email: user?.email,
+        image: user?.photoURL,
         timestamp,
       })
       .then((doc) => {
@@ -81,8 +84,8 @@ function InputBox() {
     <div className="bg-white p-2 rounded-2xl shadow-md text-gray-500 font-medium mt-6">
       <div className="flex space-x-4 p-4 items-center">
         <img
-          src={user.picture}
-          alt={user.name}
+          src={user?.photoURL}
+          alt={user?.displayName}
           className="h-10 w-10 rounded-full object-cover icon"
           loading="lazy"
         />
@@ -90,7 +93,7 @@ function InputBox() {
           <input
             className="rounded-full h-12 bg-gray-100 flex-grow px-5 focus:outline-none"
             type="text"
-            placeholder={`what's on your mind, ${user.name}?`}
+            placeholder={`what's on your mind, ${user?.displayName}?`}
             ref={inputRef}
           />
           <button hidden onClick={sendPost}>

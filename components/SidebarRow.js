@@ -1,5 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
-function SidebarRow({ src, Icon, title }) {
+import {auth} from '../firebase'
+function SidebarRow({ src, Icon, title, logout }) {
+
+  const signOut = () => {
+    if (!logout) return null
+    auth
+      .signOut()
+      .then(() => {
+        localStorage.clear()
+        console.log('Logged Out Successfully!')
+      })
+      .catch((error) => console.log(error.message));
+  }
+
   return (
     <div
       className="
@@ -11,6 +24,7 @@ function SidebarRow({ src, Icon, title }) {
       rounded-xl
       cursor-pointer
     "
+    onClick={signOut}
     >
       {src && (
         <img
@@ -22,7 +36,6 @@ function SidebarRow({ src, Icon, title }) {
           loading="lazy"
           title={title}
           className="icon"
-          onClick="logOut"
         />
       )}
       {Icon && <Icon className="h-8 w-8 text-blue-500" />}

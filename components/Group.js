@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { CometChat } from '@cometchat-pro/chat'
-import Message from './Message.vue'
+import Message from './Message'
 
 function Group({ guid }) {
   const [user, setUser] = useState(null)

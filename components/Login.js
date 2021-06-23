@@ -2,7 +2,6 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { auth, provider } from '../firebase'
 import { cometChat } from '../app.config'
-import { CometChat } from '@cometchat-pro/chat'
 
 function Login() {
   const [loading, setLoading] = useState(false)
@@ -12,19 +11,23 @@ function Login() {
     auth
       .signInWithPopup(provider)
       .then((res) => loginCometChat(res.user))
-    //   .then((res) => console.log(res.user))
       .catch((error) => {
         setLoading(false)
-        alert(error.message)
+        // alert(error.message)
+        console.log(error.message)
       })
   }
 
   const loginCometChat = (data) => {
     const authKey = cometChat.AUTH_KEY
 
-    CometChat.login(data.uid, authKey)
+    let appSetting = new CometChat.AppSettingsBuilder().subscribePresenceForAllUsers().setRegion(cometChat.APP_REGION).build();
+    CometChat.init(cometChat.APP_ID, appSetting).then(() => {
+
+      CometChat.login(data.uid, authKey)
       .then((u) => {
         console.log(u)
+        localStorage.setItem('user', JSON.stringify(data))
         setLoading(false)
       })
       .catch((error) => {
@@ -36,6 +39,9 @@ function Login() {
           alert(error.message)
         }
       })
+    });
+
+    
   }
 
   const signUpWithCometChat = (data) => {
@@ -52,6 +58,7 @@ function Login() {
       })
       .catch((error) => {
         console.log(error)
+        localStorage.setItem('user', data)
         setLoading(false)
         alert(error.message)
       })

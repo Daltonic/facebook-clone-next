@@ -14,10 +14,15 @@ import {
   SearchIcon,
   ShoppingCartIcon,
 } from '@heroicons/react/outline'
-import { useUser } from '@auth0/nextjs-auth0'
+import {useState, useEffect} from 'react'
 
 function MainHeader() {
-  const { user, error, isLoading } = useUser()
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem('user')))
+  }, [])
+
   return (
     <header className="sticky top-0 z-50 bg-white flex items-center p-2 lg:px-5 shadow-md">
       {/* Left */}
@@ -54,7 +59,7 @@ function MainHeader() {
       {/* Right */}
       <div className="flex items-center sm:space-x-2 justify-end">
         <img
-          src={user?.picture}
+          src={user?.photoURL}
           alt="avatar"
           width="30"
           height="30"
@@ -63,7 +68,7 @@ function MainHeader() {
           className="icon"
         />
         <p className="hidden lg:inline-flex text-sm whitespace-nowrap font-semibold pr-3">
-          {user?.name}
+          {user?.displayName}
         </p>
         <ViewGridIcon className="icon" />
         <ChatIcon className="icon" />

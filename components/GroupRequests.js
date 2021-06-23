@@ -1,14 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
-import { CometChat } from '@cometchat-pro/chat'
 import { useState, useEffect } from 'react'
+import { cometChat } from '../app.config'
 
 function GroupRequests() {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(false)
-  const [group, setGroup] = useState({ name: '', private: '' })
+  const [groupName, setGroupName] = useState('')
+  const [groupPrivacy, setGroupPrivacy] = useState('')
   const [groups, setGroups] = useState([])
 
   const getGroups = () => {
+    let appSetting = new CometChat.AppSettingsBuilder().subscribePresenceForAllUsers().setRegion(cometChat.APP_REGION).build();
+    CometChat.init(cometChat.APP_ID, appSetting).then(() => {
+
     const limit = 30
     const groupsRequest = new CometChat.GroupsRequestBuilder()
       .setLimit(limit)
@@ -19,14 +23,19 @@ function GroupRequests() {
       .catch((error) => {
         console.log('Groups list fetching failed with error', error)
       })
+
+    })
   }
 
   const joinGroup = (GUID) => {
+    let appSetting = new CometChat.AppSettingsBuilder().subscribePresenceForAllUsers().setRegion(cometChat.APP_REGION).build();
+    CometChat.init(cometChat.APP_ID, appSetting).then(() => {
+
     const password = ''
     const groupType = CometChat.GROUP_TYPE.PUBLIC
     CometChat.joinGroup(GUID, groupType, password)
       .then((group) => {
-        const index = groups.value.findIndex((g) => g.guid === GUID)
+        const index = groups.findIndex((g) => g.guid === GUID)
         groups[index] = group
         console.log('Group joined successfully:', group)
         alert('Group joined successfully')
@@ -35,35 +44,46 @@ function GroupRequests() {
         console.log('Group joining failed with exception:', error)
         alert(error.message)
       })
+
+    })
   }
   const moveTo = (path) => {
     router.push(path)
   }
 
-  const onSubmit = () => {
-    if (group.name === '' || group.private === '') return
+  const onSubmit = (e) => {
+    e.preventDefault()
+
+    if (groupName === '' || groupPrivacy === '') return
 
     setLoading(true)
+
+    let appSetting = new CometChat.AppSettingsBuilder().subscribePresenceForAllUsers().setRegion(cometChat.APP_REGION).build();
+    CometChat.init(cometChat.APP_ID, appSetting).then(() => {
+
     const GUID = generateGUID()
-    const groupName = group.name
     const groupType =
-      group.value.private === 'true'
+      groupPrivacy === 'true'
         ? CometChat.GROUP_TYPE.PRIVATE
         : CometChat.GROUP_TYPE.PUBLIC
     const password = ''
     const Group = new CometChat.Group(GUID, groupName, groupType, password)
+
     CometChat.createGroup(Group)
       .then((res) => {
-        groups.unshift(res) // Change to react array
-        console.log('Group created successfully:', res)
-        setGroup({ name: '', private: '' })
+        setGroups((prevState) => [res, ...prevState])
+        setGroupName('')
+        setGroupPrivacy('')
         setLoading(false)
+        console.log('Group created successfully:', res)
       })
       .catch((error) => {
         console.log('Group creation failed with exception:', error)
         setLoading(false)
         alert(error.message)
       })
+
+    })
   }
   const generateGUID = (length = 20) => {
     const result = []
@@ -100,9 +120,11 @@ function GroupRequests() {
   }
 
   useEffect(() => {
+    window.CometChat = require("@cometchat-pro/chat").CometChat;
     setUser(JSON.parse(localStorage.getItem('user')))
     getGroups()
   }, [])
+
   return (
     <div className="felx-grow flex-1 h-screen pb-44 pt-6 overflow-y-auto">
       <div className="mx-auto max-w-md md:max-w-lg lg:max-w-2xl">
@@ -136,8 +158,9 @@ function GroupRequests() {
                 px-5
                 focus:outline-none
               "
-                //   v-model.trim="group.name"
+              onChange={(e) => setGroupName(e.target.value)}
               />
+
               <select
                 className="
                 rounded-full
@@ -150,10 +173,11 @@ function GroupRequests() {
                 placeholder-gray-600
               "
                 placeholder="Select Group Privacy"
-                //   v-model="group.private"
+                defaultValue={groupPrivacy}
+                onChange={(e) => setGroupPrivacy(e.target.value)}
               >
-                <option selected disabled hidden value="">
-                  Select Group private
+                <option disabled hidden value={groupPrivacy}>
+                  Select Group Privacy
                 </option>
                 <option value="false">Public</option>
                 <option value="true">Private</option>
@@ -171,6 +195,7 @@ function GroupRequests() {
                 rounded-full
                 focus:outline-none
               "
+              onClick={(e) => onSubmit(e)}
               >
                 {loading ? 'Creating...' : 'Create'}
               </button>
