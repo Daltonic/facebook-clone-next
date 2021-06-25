@@ -2,32 +2,32 @@ import StoryCard from './StoryCard'
 const stories = [
   {
     name: 'Darlington Gospel',
-    src: 'https://firebasestorage.googleapis.com/v0/b/facebook-clone-dff86.appspot.com/o/stories%2FIMG-20191026-WA0000.jpg?alt=media&token=23ff54fb-ceb2-4476-a142-e886a32ebb60',
+    src: 'https://firebasestorage.googleapis.com/v0/b/facebook-clone-dff86.appspot.com/o/stories%2FFB_IMG_1577470324531.jpg?alt=media&token=8d2e6d98-b782-46f1-8f61-9d349a301402',
     profile:
       'https://firebasestorage.googleapis.com/v0/b/facebook-clone-dff86.appspot.com/o/stories%2FWhatsApp%20Image%202021-01-26%20at%2012.25.20%20PM.jpeg?alt=media&token=d3fe60ba-3e75-4748-9b4f-9b690c6f1426',
   },
   {
-    name: 'Myles Munroe',
-    src: 'https://static.independent.co.uk/s3fs-public/thumbnails/image/2014/11/11/17/Myles_Munroe.jpg?width=1200',
+    name: 'Prathamesh Majgaonkar',
+    src: 'https://firebasestorage.googleapis.com/v0/b/facebook-clone-dff86.appspot.com/o/stories%2F616323b2efd2d885ec96ecebf315c93e.jpg?alt=media&token=cd57cd3e-8b31-4130-bf4d-5708dc2f8cec',
     profile:
-      'https://1.bp.blogspot.com/-NVuQ02pDdMk/XcA7WZrOuGI/AAAAAAAAU1k/CJflEQ7wBiwOEfPsuUnYdMVH4ppCogXmQCLcBGAsYHQ/s1600/Myles%2B1.jpg',
+      'https://lh3.googleusercontent.com/a-/AOh14Gi1b7LJFStKT5Dhg9BLdD23mBHn7FRuSN3GmgjS=s96-c',
   },
   {
-    name: 'TD Jakes',
-    src: 'https://jakesdivinity.org/wp-content/uploads/2020/09/rsz_bishop_jakes_headshot-e1600264848251.jpg',
+    name: 'Priyanka Gurnani',
+    src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSG7YOxamQs3xieRhKzsKmvMA-POW3lKkkLj99Vtq6RiUdNlqm5GrEAlH13Rsl7bBuGmI&usqp=CAU',
     profile:
-      'https://www1.cbn.com/sites/default/files/styles/original/public/media/standard/images/SUJA1_TD_Jakes_SI.jpg?itok=9Bg2WhZt',
+      'https://ca.slack-edge.com/T0108EA6BH8-U012VFXD21W-7aad7d857106-512',
   },
   {
-    name: 'Kevin Zadia',
-    src: 'https://kevinzadai.com/wp-content/uploads/2019/12/kevin-kathi-zadai-partnership.jpg',
+    name: 'Ajay Gajra',
+    src: 'https://i.pinimg.com/originals/2e/c2/5b/2ec25b60d1a40bd9c0e883c527146aa7.jpg',
     profile:
-      'https://yt3.ggpht.com/ytc/AAUvwngwW1v09FEB-mhdE2T6Jkqi0gdfbRpvEpBwCtce=s900-c-k-c0x00ffffff-no-rj',
+      'https://ca.slack-edge.com/T0108EA6BH8-U012ZT1VAJV-b965eba64db9-512',
   },
   {
-    name: 'Mark Zuckerberg',
-    src: 'https://links.papareact.com/xql',
-    profile: 'https://links.papareact.com/snf',
+    name: 'Priyadarshini Nadar',
+    src: 'https://media.nature.com/lw800/magazine-assets/d41586-021-00075-2/d41586-021-00075-2_18790032.jpg',
+    profile: 'https://ca.slack-edge.com/T0108EA6BH8-U01EZCVTSD9-ba7fa5e960b3-512',
   },
 ]
 
