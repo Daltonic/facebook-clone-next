@@ -1,34 +1,78 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# How to Build a Social Networking site with NextJs (Facebook Clone)
 
-## Getting Started
+Read the full tutorial here: [**>> How to Build a Social Networking site with NextJs (Facebook Clone)**](https://www.cometchat.com/tutorials/#)
 
-First, run the development server:
+This example shows How to Build a Social Networking site with NextJs (Facebook Clone):
 
-```bash
-npm run dev
-# or
-yarn dev
+![Facebook Clone](./screenshots/0.gif)
+<center><figcaption>Facebook Clone</figcaption></center>
+
+![Facebook Clone Chat Screen](./screenshots/1.gif)
+<center><figcaption>Facebook Clone Chat Screen</figcaption></center>
+
+## Technology
+
+This demo uses:
+
+- CometChat Pro 2.3.0
+- Firebase
+- NextJs
+- Tailwind CSS
+- Heroicons
+
+## Running the demo
+
+To run the demo follow these steps:
+
+1. [Head to CometChat Pro and create an account](https://app.cometchat.com/signup)
+2. From the [dashboard](https://app.cometchat.com/apps), add a new app called **"Facebook-clone"**
+3. Select this newly added app from the list.
+4. From the Quick Start copy the **APP_ID, APP_REGION and AUTH_KEY**. These will be used later.
+5. Also copy the **REST_API_KEY** from the API & Auth Key tab.
+6. Navigate to the Users tab, and delete all the default users and groups leaving it clean **(very important)**.
+7. Download the repository [here](https://github.com/Daltonic/facebook-clone-next/archive/master.zip) or by running `git clone https://github.com/Daltonic/facebook-clone-next.git` and open it in a code editor.
+8. [Head to Firebase and create a new project](https://console.firebase.google.com)
+9. Create a file called **app.config.js** in the **src** folder of your project.
+10. Import and inject your secret keys in the **app.config.js** file containing your CometChat and Firebase in this manner.
+
+```js
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: 'xxx-xxx-xxx-xxx-xxx-xxx-xxx-xxx',
+  authDomain: 'xxx-xxx-xxx-xxx-xxx-xxx-xxx',
+  databaseURL: 'xxx-xxx-xxx-xxx-xxx-xxx-xxx-xxx-xxx',
+  projectId: 'xxx-xxx-xxx',
+  storageBucket: 'xxx-xxx-xxx-xxx-xxx',
+  messagingSenderId: 'xxx-xxx-xxx',
+  appId: 'xxx-xxx-xxx-xxx-xxx-xxx-xxx-xxx',
+  measurementId: 'xxx-xxx-xxx',
+}
+
+const cometChatConfig = {
+  APP_ID: 'xxx-xxx-xxx',
+  AUTH_KEY: 'xxx-xxx-xxx-xxx-xxx-xxx-xxx-xxx',
+  REST_KEY: 'xxx-xxx-xxx-xxx-xxx-xxx-xxx-xxx',
+  APP_REGION: 'xx',
+}
+
+export { firebaseConfig, cometChatConfig }
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+11. Make sure to exclude **app.config.js** in your gitIgnore file from being exposed online.
+12. Run the following command to install the app.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+```sh
+    yarn install
+    yarn dev
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Questions about running the demo? [Open an issue](https://github.com/Daltonic/facebook-clone-next/issues). We're here to help ✌️
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Useful links
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- 🏠 [CometChat Homepage](https://app.cometchat.com/signup)
+- 🚀 [Create your free account](https://app.cometchat.com/apps)
+- 📚 [Documentation](https://prodocs.cometchat.com)
+- 👾 [GitHub](https://www.github.com/cometchat-pro)
+- 🔥 [Firebase](https://console.firebase.google.com)
+- 🔷 [NextJs](https://nextjs.org/)
