@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import { CometChat } from '@cometchat-pro/chat'
 import { cometChat } from '../app.config'
 import { useState, useEffect } from 'react'
 
@@ -40,8 +39,16 @@ function FriendRequests() {
   }
 
   useEffect(() => {
+    window.CometChat = require('@cometchat-pro/chat').CometChat
     setUser(JSON.parse(localStorage.getItem('user')))
-    getUsers()
+
+    let appSetting = new CometChat.AppSettingsBuilder()
+      .subscribePresenceForAllUsers()
+      .setRegion(cometChat.APP_REGION)
+      .build()
+    CometChat.init(cometChat.APP_ID, appSetting).then(() => {
+      getUsers()
+    })
   }, [])
 
   return (
@@ -93,50 +100,6 @@ function FriendRequests() {
             </div>
           </div>
         ))}
-        <div
-          className="
-          flex
-          justify-between
-          bg-white
-          p-2
-          rounded-2xl
-          shadow-md
-          text-gray-500
-          font-medium
-          mt-6
-        "
-          key={index}
-        >
-          <a
-            href={`/chats/user/${user?.uid}`}
-            className="flex items-center space-x-4 p-2"
-          >
-            <img
-              src={user?.avatar}
-              alt={user?.name}
-              className="h-10 w-10 rounded-full object-cover"
-              loading="lazy"
-            />
-            <p>{user?.name}</p>
-          </a>
-          <div className="flex items-center space-x-4 p-2">
-            <button
-              className="
-              bg-blue-500
-              hover:bg-blue-700
-              text-white
-              font-bold
-              py-2
-              px-4
-              rounded-full
-              focus:outline-none
-            "
-              onClick={() => addFriend(user?.uid)}
-            >
-              Add as Friend
-            </button>
-          </div>
-        </div>
       </div>
     </div>
   )

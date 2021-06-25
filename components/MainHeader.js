@@ -12,7 +12,7 @@ import {
   FlagIcon,
   PlayIcon,
   SearchIcon,
-  ShoppingCartIcon,
+  UsersIcon,
 } from '@heroicons/react/outline'
 import {useState, useEffect} from 'react'
 
@@ -48,11 +48,11 @@ function MainHeader() {
       {/* Center */}
       <div className="flex justify-center flex-grow">
         <div className="flex space-x-6 md:space-x-2">
-          <HeaderIcon active Icon={HomeIcon} />
+          <HeaderIcon active Icon={HomeIcon} navTo={'/'} />
           <HeaderIcon Icon={FlagIcon} />
           <HeaderIcon Icon={PlayIcon} />
-          <HeaderIcon Icon={ShoppingCartIcon} />
-          <HeaderIcon Icon={UserGroupIcon} />
+          <HeaderIcon Icon={UsersIcon} navTo={'/users'} />
+          <HeaderIcon Icon={UserGroupIcon} navTo={'/groups'} />
         </div>
       </div>
 

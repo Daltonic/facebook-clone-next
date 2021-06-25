@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { useRouter } from "next/router"
 import { useState, useEffect } from 'react'
 import { cometChat } from '../app.config'
 
@@ -8,6 +9,7 @@ function GroupRequests() {
   const [groupName, setGroupName] = useState('')
   const [groupPrivacy, setGroupPrivacy] = useState('')
   const [groups, setGroups] = useState([])
+  const router = useRouter()
 
   const getGroups = () => {
     let appSetting = new CometChat.AppSettingsBuilder().subscribePresenceForAllUsers().setRegion(cometChat.APP_REGION).build();
@@ -48,7 +50,7 @@ function GroupRequests() {
     })
   }
   const moveTo = (path) => {
-    router.push(path)
+    router.push('/chats/[type]/[id]', path)
   }
 
   const onSubmit = (e) => {

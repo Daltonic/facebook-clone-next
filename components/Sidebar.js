@@ -35,7 +35,6 @@ function Sidebar() {
       <SidebarRow Icon={ClockIcon} title="Memories" />
       <SidebarRow Icon={ChevronDownIcon} title="See More" />
       <SidebarRow Icon={LogoutIcon} title="Logout" logout={true} />
-      <button onClick={moveTo}>Logout</button>
     </div>
   )
 }

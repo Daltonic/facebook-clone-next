@@ -1,9 +1,11 @@
 import Image from 'next/image'
+import {useRouter} from 'next/router'
 import { useState } from 'react'
 import { auth, provider } from '../firebase'
 import { cometChat } from '../app.config'
 
 function Login() {
+  const router = useRouter()
   const [loading, setLoading] = useState(false)
 
   const signIn = () => {
@@ -29,6 +31,7 @@ function Login() {
         console.log(u)
         localStorage.setItem('user', JSON.stringify(data))
         setLoading(false)
+        router.reload()
       })
       .catch((error) => {
         if (error.code === 'ERR_UID_NOT_FOUND') {

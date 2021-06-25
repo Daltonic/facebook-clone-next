@@ -1,16 +1,19 @@
 /* eslint-disable @next/next/no-img-element */
-import {auth} from '../firebase'
+import { auth } from '../firebase'
+import { useRouter } from 'next/router'
 function SidebarRow({ src, Icon, title, logout }) {
+  const router = useRouter()
 
   const signOut = () => {
     if (!logout) return null
     auth
       .signOut()
       .then(() => {
+        router.pathname === '/' ? router.reload() : router.push('/')
         localStorage.clear()
         console.log('Logged Out Successfully!')
       })
-      .catch((error) => console.log(error.message));
+      .catch((error) => console.log(error.message))
   }
 
   return (
@@ -24,7 +27,7 @@ function SidebarRow({ src, Icon, title, logout }) {
       rounded-xl
       cursor-pointer
     "
-    onClick={signOut}
+      onClick={signOut}
     >
       {src && (
         <img

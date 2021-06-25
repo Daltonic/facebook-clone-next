@@ -1,6 +1,6 @@
-import { CometChat } from '@cometchat-pro/chat'
 import Message from './Message'
 import { useState, useEffect } from 'react'
+import { cometChat } from '../app.config'
 
 function User({ uid }) {
   const [user, setUser] = useState(null)
@@ -40,7 +40,7 @@ function User({ uid }) {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    sendMessage(id, message)
+    sendMessage(uid, message)
   }
 
   const sendMessage = (uid, message) => {
@@ -78,18 +78,25 @@ function User({ uid }) {
   }
 
   useEffect(() => {
-    getUser(uid)
-    getMessages(uid)
-    listenForMessage(uid)
+    window.CometChat = require('@cometchat-pro/chat').CometChat
 
-    setUser(JSON.parse(localStorage.getItem('user')))
+    let appSetting = new CometChat.AppSettingsBuilder()
+      .subscribePresenceForAllUsers()
+      .setRegion(cometChat.APP_REGION)
+      .build()
+
+    CometChat.init(cometChat.APP_ID, appSetting).then(() => {
+      getUser(uid)
+      getMessages(uid)
+      listenForMessage(uid)
+    })
   }, [uid])
 
   return (
     <div className="felx-grow flex-1 h-screen pb-44 pt-6">
       <div
         id="messages"
-        className="mx-auto max-w-md md:max-w-lg lg:max-w-2xl overflow-y-auto overflow-x-hidden"
+        className="h-almost mx-auto max-w-md md:max-w-lg lg:max-w-2xl overflow-y-auto overflow-x-hidden"
       >
         {messages.map((msg, index) => (
           <div key={index} className="message">

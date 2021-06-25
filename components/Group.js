@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import { CometChat } from '@cometchat-pro/chat'
 import Message from './Message'
+import { cometChat } from '../app.config'
 
 function Group({ guid }) {
   const [user, setUser] = useState(null)
@@ -9,14 +9,21 @@ function Group({ guid }) {
   const [message, setMessage] = useState('')
 
   useEffect(() => {
-    getGroup(guid)
-    getMessages(guid)
-    listenForMessage(guid)
+    window.CometChat = require('@cometchat-pro/chat').CometChat
+
+    let appSetting = new CometChat.AppSettingsBuilder()
+      .subscribePresenceForAllUsers()
+      .setRegion(cometChat.APP_REGION)
+      .build()
+
+    CometChat.init(cometChat.APP_ID, appSetting).then(() => {
+      getGroup(guid)
+      getMessages(guid)
+      listenForMessage(guid)
+    })
 
     setUser(JSON.parse(localStorage.getItem('user')))
   }, [guid])
-
-  onUpdated(() => scrollToEnd())
 
   const listenForMessage = (listenerID) => {
     CometChat.addMessageListener(
@@ -92,7 +99,7 @@ function Group({ guid }) {
     <div className="felx-grow flex-1 h-screen pb-44 pt-6">
       <div
         id="messages"
-        className="mx-auto max-w-md md:max-w-lg lg:max-w-2xl overflow-y-auto overflow-x-hidden"
+        className="h-almost mx-auto max-w-md md:max-w-lg lg:max-w-2xl overflow-y-auto overflow-x-hidden"
       >
         {messages.map((msg, index) => (
           <div key={index} className="message">
