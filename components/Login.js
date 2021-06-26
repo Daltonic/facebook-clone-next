@@ -68,7 +68,7 @@ function Login() {
   }
 
   return (
-    <div className="grid place-items-center">
+    <div className="h-screen bg-gray-100 overflow-hidden grid place-items-center">
       <Image
         src="https://links.papareact.com/t4i"
         alt="facebook logo"

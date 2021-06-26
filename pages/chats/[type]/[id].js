@@ -3,10 +3,15 @@ import Sidebar from '../../../components/Sidebar'
 import User from '../../../components/User'
 import Group from '../../../components/Group'
 import Widget from '../../../components/Widget'
+import Head from 'next/head'
 
 function chats({ type, id }) {
   return (
-    <div className="chats">
+    <div className="h-screen bg-gray-100 overflow-hidden"> 
+      <Head>
+        <title>Facebook - Chats</title>
+      </Head>
+
       <MainHeader />
       <main className="flex">
         <Sidebar />
