@@ -2,7 +2,7 @@ import Image from 'next/image'
 import {useRouter} from 'next/router'
 import { useState } from 'react'
 import { auth, provider } from '../firebase'
-import { cometChat } from '../app.config'
+import { cometChatConfig } from '../app.config'
 
 function Login() {
   const router = useRouter()
@@ -21,10 +21,10 @@ function Login() {
   }
 
   const loginCometChat = (data) => {
-    const authKey = cometChat.AUTH_KEY
+    const authKey = cometChatConfig.AUTH_KEY
 
-    let appSetting = new CometChat.AppSettingsBuilder().subscribePresenceForAllUsers().setRegion(cometChat.APP_REGION).build();
-    CometChat.init(cometChat.APP_ID, appSetting).then(() => {
+    let appSetting = new CometChat.AppSettingsBuilder().subscribePresenceForAllUsers().setRegion(cometChatConfig.APP_REGION).build();
+    CometChat.init(cometChatConfig.APP_ID, appSetting).then(() => {
 
       CometChat.login(data.uid, authKey)
       .then((u) => {
@@ -48,7 +48,7 @@ function Login() {
   }
 
   const signUpWithCometChat = (data) => {
-    const authKey = cometChat.AUTH_KEY
+    const authKey = cometChatConfig.AUTH_KEY
     const user = new CometChat.User(data.uid)
 
     user.setName(data.displayName)
