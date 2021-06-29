@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { cometChatConfig } from '../app.config'
+import { COMETCHAT_CONSTANTS } from '../app.config'
 import { useState, useEffect } from 'react'
 
 function FriendRequests() {
@@ -25,8 +25,8 @@ function FriendRequests() {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        appId: cometChatConfig.APP_ID,
-        apiKey: cometChatConfig.REST_KEY,
+        appId: COMETCHAT_CONSTANTS.APP_ID,
+        apiKey: COMETCHAT_CONSTANTS.REST_KEY,
       },
       body: JSON.stringify({ accepted: [uid] }),
     }
@@ -44,9 +44,9 @@ function FriendRequests() {
 
     let appSetting = new CometChat.AppSettingsBuilder()
       .subscribePresenceForAllUsers()
-      .setRegion(cometChatConfig.APP_REGION)
+      .setRegion(COMETCHAT_CONSTANTS.APP_REGION)
       .build()
-    CometChat.init(cometChatConfig.APP_ID, appSetting).then(() => {
+    CometChat.init(COMETCHAT_CONSTANTS.APP_ID, appSetting).then(() => {
       getUsers()
     })
   }, [])
