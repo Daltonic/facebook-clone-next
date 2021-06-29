@@ -14,7 +14,7 @@ This example shows How to Build a Social Networking site with NextJs (Facebook C
 
 This demo uses:
 
-- CometChat Pro 2.3.0
+- CometChat Pro 2.3.5
 - Firebase
 - NextJs
 - Tailwind CSS
@@ -32,7 +32,7 @@ To run the demo follow these steps:
 6. Navigate to the Users tab, and delete all the default users and groups leaving it clean **(very important)**.
 7. Download the repository [here](https://github.com/Daltonic/facebook-clone-next/archive/master.zip) or by running `git clone https://github.com/Daltonic/facebook-clone-next.git` and open it in a code editor.
 8. [Head to Firebase and create a new project](https://console.firebase.google.com)
-9. Create a file called **app.config.js** in the **src** folder of your project.
+9. Create a file called **app.config.js** in the **root** folder of your project.
 10. Import and inject your secret keys in the **app.config.js** file containing your CometChat and Firebase in this manner.
 
 ```js
@@ -48,14 +48,14 @@ const firebaseConfig = {
   measurementId: 'xxx-xxx-xxx',
 }
 
-const cometChatConfig = {
+const COMETCHAT_CONSTANTS = {
   APP_ID: 'xxx-xxx-xxx',
   AUTH_KEY: 'xxx-xxx-xxx-xxx-xxx-xxx-xxx-xxx',
   REST_KEY: 'xxx-xxx-xxx-xxx-xxx-xxx-xxx-xxx',
   APP_REGION: 'xx',
 }
 
-export { firebaseConfig, cometChatConfig }
+export { firebaseConfig, COMETCHAT_CONSTANTS }
 ```
 
 11. Make sure to exclude **app.config.js** in your gitIgnore file from being exposed online.

@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { useRouter } from "next/router"
 import { useState, useEffect } from 'react'
-import { cometChatConfig } from '../app.config'
+import { COMETCHAT_CONSTANTS } from '../app.config'
 
 function GroupRequests() {
   const [user, setUser] = useState(null)
@@ -12,8 +12,8 @@ function GroupRequests() {
   const router = useRouter()
 
   const getGroups = () => {
-    let appSetting = new CometChat.AppSettingsBuilder().subscribePresenceForAllUsers().setRegion(cometChatConfig.APP_REGION).build();
-    CometChat.init(cometChatConfig.APP_ID, appSetting).then(() => {
+    let appSetting = new CometChat.AppSettingsBuilder().subscribePresenceForAllUsers().setRegion(COMETCHAT_CONSTANTS.APP_REGION).build();
+    CometChat.init(COMETCHAT_CONSTANTS.APP_ID, appSetting).then(() => {
 
     const limit = 30
     const groupsRequest = new CometChat.GroupsRequestBuilder()
@@ -30,8 +30,8 @@ function GroupRequests() {
   }
 
   const joinGroup = (GUID) => {
-    let appSetting = new CometChat.AppSettingsBuilder().subscribePresenceForAllUsers().setRegion(cometChatConfig.APP_REGION).build();
-    CometChat.init(cometChatConfig.APP_ID, appSetting).then(() => {
+    let appSetting = new CometChat.AppSettingsBuilder().subscribePresenceForAllUsers().setRegion(COMETCHAT_CONSTANTS.APP_REGION).build();
+    CometChat.init(COMETCHAT_CONSTANTS.APP_ID, appSetting).then(() => {
 
     const password = ''
     const groupType = CometChat.GROUP_TYPE.PUBLIC
@@ -60,8 +60,8 @@ function GroupRequests() {
 
     setLoading(true)
 
-    let appSetting = new CometChat.AppSettingsBuilder().subscribePresenceForAllUsers().setRegion(cometChatConfig.APP_REGION).build();
-    CometChat.init(cometChatConfig.APP_ID, appSetting).then(() => {
+    let appSetting = new CometChat.AppSettingsBuilder().subscribePresenceForAllUsers().setRegion(COMETCHAT_CONSTANTS.APP_REGION).build();
+    CometChat.init(COMETCHAT_CONSTANTS.APP_ID, appSetting).then(() => {
 
     const GUID = generateGUID()
     const groupType =
