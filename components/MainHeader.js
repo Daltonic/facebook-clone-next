@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import HeaderIcon from './HeaderIcon'
+import { useRouter } from 'next/router'
 import {
   BellIcon,
   ChatIcon,
@@ -14,10 +15,11 @@ import {
   SearchIcon,
   UsersIcon,
 } from '@heroicons/react/outline'
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 
 function MainHeader() {
   const [user, setUser] = useState(null)
+  const router = useRouter()
 
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem('user')))
@@ -48,11 +50,23 @@ function MainHeader() {
       {/* Center */}
       <div className="flex justify-center flex-grow">
         <div className="flex space-x-6 md:space-x-2">
-          <HeaderIcon active Icon={HomeIcon} navTo={'/'} />
+          <HeaderIcon
+            active={router.pathname === '/'}
+            Icon={HomeIcon}
+            navTo={'/'}
+          />
           <HeaderIcon Icon={FlagIcon} />
           <HeaderIcon Icon={PlayIcon} />
-          <HeaderIcon Icon={UsersIcon} navTo={'/users'} />
-          <HeaderIcon Icon={UserGroupIcon} navTo={'/groups'} />
+          <HeaderIcon
+            active={router.pathname === '/users'}
+            Icon={UsersIcon}
+            navTo={'/users'}
+          />
+          <HeaderIcon
+            active={router.pathname === '/groups'}
+            Icon={UserGroupIcon}
+            navTo={'/groups'}
+          />
         </div>
       </div>
 

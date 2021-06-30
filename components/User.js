@@ -1,6 +1,6 @@
 import Message from './Message'
 import { useState, useEffect } from 'react'
-import { cometChatConfig } from '../app.config'
+import { COMETCHAT_CONSTANTS } from '../app.config'
 
 function User({ uid }) {
   const [user, setUser] = useState(null)
@@ -82,10 +82,10 @@ function User({ uid }) {
 
     let appSetting = new CometChat.AppSettingsBuilder()
       .subscribePresenceForAllUsers()
-      .setRegion(cometChatConfig.APP_REGION)
+      .setRegion(COMETCHAT_CONSTANTS.APP_REGION)
       .build()
 
-    CometChat.init(cometChatConfig.APP_ID, appSetting).then(() => {
+    CometChat.init(COMETCHAT_CONSTANTS.APP_ID, appSetting).then(() => {
       getUser(uid)
       getMessages(uid)
       listenForMessage(uid)

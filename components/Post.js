@@ -29,7 +29,7 @@ function Post({ name, message, email, postImage, image, timestamp }) {
       </div>
       
       {postImage ? (
-        <div className="relative h-56 md:h-96 bg-white">
+        <div className="relative h-56 md:h-96 bg-white overflow-hidden">
           <img
             src={postImage}
             alt={name}

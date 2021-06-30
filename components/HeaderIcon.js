@@ -3,7 +3,7 @@ function HeaderIcon({ active, Icon, navTo }) {
   const router = useRouter()
 
   const moveTo = () => {
-    router.push(navTo)
+    if (navTo) router.push(navTo)
   }
   return (
     <div
