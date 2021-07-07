@@ -54,6 +54,7 @@ function FriendRequests() {
   return (
     <div className="felx-grow flex-1 h-screen pb-44 pt-6 overflow-y-auto">
       <div className="mx-auto max-w-md md:max-w-lg lg:max-w-2xl">
+        {users.length < 1 ? <p>No Users yet!</p> : ''}
         {users.map((user, index) => (
           <div
             className="

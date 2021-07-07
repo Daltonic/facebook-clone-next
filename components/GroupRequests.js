@@ -204,6 +204,7 @@ function GroupRequests() {
             </form>
           </div>
         </div>
+        {groups.length < 1 ? <p>No Groups yet!</p> : ''}
         {groups.map((group, index) => (
           <div
             className="
