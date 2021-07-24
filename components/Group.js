@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import Message from './Message'
-import { COMETCHAT_CONSTANTS } from '../app.config'
 
 function Group({ guid }) {
   const [user, setUser] = useState(null)
@@ -9,18 +8,9 @@ function Group({ guid }) {
   const [message, setMessage] = useState('')
 
   useEffect(() => {
-    window.CometChat = require('@cometchat-pro/chat').CometChat
-
-    let appSetting = new CometChat.AppSettingsBuilder()
-      .subscribePresenceForAllUsers()
-      .setRegion(COMETCHAT_CONSTANTS.APP_REGION)
-      .build()
-
-    CometChat.init(COMETCHAT_CONSTANTS.APP_ID, appSetting).then(() => {
-      getGroup(guid)
-      getMessages(guid)
-      listenForMessage(guid)
-    })
+    getGroup(guid)
+    getMessages(guid)
+    listenForMessage(guid)
 
     setUser(JSON.parse(localStorage.getItem('user')))
   }, [guid])
@@ -109,8 +99,8 @@ function Group({ guid }) {
               }
               avatar={
                 msg?.receiverId !== group?.guid
-                  ? group?.avatar
-                  : msg.sender.avatar
+                  ? group?.avatar || group?.metadata?.avatar
+                  : msg.sender.avatar || msg.sender.metadata?.avatar
               }
               message={msg.text}
               timestamp={msg.sentAt}

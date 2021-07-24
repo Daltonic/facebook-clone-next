@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import { useRouter } from "next/router"
+import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
-import { COMETCHAT_CONSTANTS } from '../app.config'
 
 function GroupRequests() {
   const [user, setUser] = useState(null)
@@ -12,9 +11,6 @@ function GroupRequests() {
   const router = useRouter()
 
   const getGroups = () => {
-    let appSetting = new CometChat.AppSettingsBuilder().subscribePresenceForAllUsers().setRegion(COMETCHAT_CONSTANTS.APP_REGION).build();
-    CometChat.init(COMETCHAT_CONSTANTS.APP_ID, appSetting).then(() => {
-
     const limit = 30
     const groupsRequest = new CometChat.GroupsRequestBuilder()
       .setLimit(limit)
@@ -25,14 +21,9 @@ function GroupRequests() {
       .catch((error) => {
         console.log('Groups list fetching failed with error', error)
       })
-
-    })
   }
 
   const joinGroup = (GUID) => {
-    let appSetting = new CometChat.AppSettingsBuilder().subscribePresenceForAllUsers().setRegion(COMETCHAT_CONSTANTS.APP_REGION).build();
-    CometChat.init(COMETCHAT_CONSTANTS.APP_ID, appSetting).then(() => {
-
     const password = ''
     const groupType = CometChat.GROUP_TYPE.PUBLIC
     CometChat.joinGroup(GUID, groupType, password)
@@ -46,9 +37,8 @@ function GroupRequests() {
         console.log('Group joining failed with exception:', error)
         alert(error.message)
       })
-
-    })
   }
+
   const moveTo = (path) => {
     router.push('/chats/[type]/[id]', path)
   }
@@ -59,9 +49,6 @@ function GroupRequests() {
     if (groupName === '' || groupPrivacy === '') return
 
     setLoading(true)
-
-    let appSetting = new CometChat.AppSettingsBuilder().subscribePresenceForAllUsers().setRegion(COMETCHAT_CONSTANTS.APP_REGION).build();
-    CometChat.init(COMETCHAT_CONSTANTS.APP_ID, appSetting).then(() => {
 
     const GUID = generateGUID()
     const groupType =
@@ -84,8 +71,6 @@ function GroupRequests() {
         setLoading(false)
         alert(error.message)
       })
-
-    })
   }
   const generateGUID = (length = 20) => {
     const result = []
@@ -122,7 +107,6 @@ function GroupRequests() {
   }
 
   useEffect(() => {
-    window.CometChat = require("@cometchat-pro/chat").CometChat;
     setUser(JSON.parse(localStorage.getItem('user')))
     getGroups()
   }, [])
@@ -160,7 +144,7 @@ function GroupRequests() {
                 px-5
                 focus:outline-none
               "
-              onChange={(e) => setGroupName(e.target.value)}
+                onChange={(e) => setGroupName(e.target.value)}
               />
 
               <select
@@ -197,7 +181,7 @@ function GroupRequests() {
                 rounded-full
                 focus:outline-none
               "
-              onClick={(e) => onSubmit(e)}
+                onClick={(e) => onSubmit(e)}
               >
                 {loading ? 'Creating...' : 'Create'}
               </button>

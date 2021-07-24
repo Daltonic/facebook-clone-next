@@ -1,12 +1,30 @@
+import dynamic from 'next/dynamic'
 import MainHeader from '../components/MainHeader'
 import Sidebar from '../components/Sidebar'
-import GroupRequests from '../components/GroupRequests'
 import Widget from '../components/Widget'
 import Head from 'next/head'
+import { useEffect } from 'react'
+import { COMETCHAT_CONSTANTS } from '../app.config'
+const GroupRequests = dynamic(() => import('../components/GroupRequests'), {
+  ssr: false,
+})
 
-function groups() {
+function Groups() {
+  useEffect(() => {
+    window.CometChat = require('@cometchat-pro/chat').CometChat
+
+    let appSetting = new CometChat.AppSettingsBuilder()
+      .subscribePresenceForAllUsers()
+      .setRegion(COMETCHAT_CONSTANTS.APP_REGION)
+      .build()
+
+    CometChat.init(COMETCHAT_CONSTANTS.APP_ID, appSetting).then(() => {
+      console.log('CometChat Initialized Successfully!')
+    })
+  }, [])
+
   return (
-    <div className="h-screen bg-gray-100 overflow-hidden"> 
+    <div className="h-screen bg-gray-100 overflow-hidden">
       <Head>
         <title>Facebook - Groups</title>
       </Head>
@@ -21,4 +39,4 @@ function groups() {
   )
 }
 
-export default groups
+export default Groups

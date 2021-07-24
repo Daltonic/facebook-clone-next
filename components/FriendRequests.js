@@ -39,16 +39,8 @@ function FriendRequests() {
   }
 
   useEffect(() => {
-    window.CometChat = require('@cometchat-pro/chat').CometChat
     setUser(JSON.parse(localStorage.getItem('user')))
-
-    let appSetting = new CometChat.AppSettingsBuilder()
-      .subscribePresenceForAllUsers()
-      .setRegion(COMETCHAT_CONSTANTS.APP_REGION)
-      .build()
-    CometChat.init(COMETCHAT_CONSTANTS.APP_ID, appSetting).then(() => {
-      getUsers()
-    })
+    getUsers()
   }, [])
 
   return (
@@ -75,7 +67,7 @@ function FriendRequests() {
               className="flex items-center space-x-4 p-2"
             >
               <img
-                src={user?.avatar}
+                src={user?.avatar || user?.metadata.avatar}
                 alt={user?.name}
                 className="h-10 w-10 rounded-full object-cover"
                 loading="lazy"
