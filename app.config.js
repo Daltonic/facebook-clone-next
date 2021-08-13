@@ -1,14 +1,11 @@
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
 const firebaseConfig = {
   apiKey: 'xxx-xxx-xxx-xxx-xxx-xxx-xxx-xxx',
   authDomain: 'xxx-xxx-xxx-xxx-xxx-xxx-xxx',
-  databaseURL: 'xxx-xxx-xxx-xxx-xxx-xxx-xxx-xxx-xxx',
   projectId: 'xxx-xxx-xxx',
   storageBucket: 'xxx-xxx-xxx-xxx-xxx',
   messagingSenderId: 'xxx-xxx-xxx',
   appId: 'xxx-xxx-xxx-xxx-xxx-xxx-xxx-xxx',
-  measurementId: 'xxx-xxx-xxx',
 }
 
 const COMETCHAT_CONSTANTS = {

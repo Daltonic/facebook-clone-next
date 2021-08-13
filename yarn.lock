@@ -54,10 +54,10 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@cometchat-pro/chat@2.3.5":
-  version "2.3.5"
-  resolved "https://registry.yarnpkg.com/@cometchat-pro/chat/-/chat-2.3.5.tgz#cd3c8494ad1337c3de3c20433ebbf53eefa96eb5"
-  integrity sha512-sjRtpqiABDuiGuwhe2QflkiCG2OiS4EMvJOXsWKu/DKgzVa5GRk34l+1+q3BdCk4GcHRNNfyQf7Vv+URe8B6cQ==
+"@cometchat-pro/chat@2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@cometchat-pro/chat/-/chat-2.4.0.tgz#c49e1f6adfb32cc70ae64835fa8bb9a8433d47c1"
+  integrity sha512-T63P4Da8EfMsUQsrF1fBHD/6O9pjDlYyWVDCh+I+PSu17YCDmm4HPJxvCwJBh1RD1Moz1qbHgQYln+waCzLFcg==
 
 "@eslint/eslintrc@^0.4.2":
   version "0.4.2"
